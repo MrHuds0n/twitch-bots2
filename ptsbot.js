@@ -4,14 +4,17 @@ var irc = require('node-twitch-irc'),
 var config = {
 	nickname: 'playtouhoubot',
 	channels: ['#playtouhoubot', '#playtouhouscum'],
-	oauth: 'oauth:e1u61mnwryuiq9s29yrk7bfjxfxphcd',
+	oauth: 'auth',
 };
 
-var mods = ['playtouhouscum'];
+var admins = ['playtouhouscum']; //This is supposed to contain the administrators of the bot itself.
+var mods = ['playtouhouscum']; //This is supposed to contain the moderators of the channel.
 
+//Variables for the +r command for quick changing.
 var rBirdtross = 'Budding YouTuber, Minecrafter, Space sim pilot and flightless kiwi. http://twitch.tv/birdtross';
 var rDandefender = 'Avid gamer, Part time streamer, part time Mod. Dan the Man. http://twitch.tv/dandefender';
 
+//Variables for the +g command for quick changing.
 var gDiscovery = 'Discovery is a mod for a great space-sim Freelancer. Learn more: http://discoverygc.com/wiki/Freelancer';
 var gTouhou = 'Touhou is a series of rock-hard bullet hell shoot-em-ups. Learn more: http://touhou.wikia.com/wiki/Touhou_Wiki';
 var gOpenTTD = 'OpenTTD is a freeware tycoon based around building a transportation company. Learn more: http://openttd.org';
@@ -48,7 +51,7 @@ var client = new irc.connect(config, function(err, event) {
 				console.log('Parted (r) channel: #'+user.username);
 			}
 
-			else if (msg.indexOf('+ajoin ') === 0 && _.indexOf(mods, user.username) >= 0) {
+			else if (msg.indexOf('+ajoin ') === 0 && _.indexOf(admins, user.username) >= 0) {
 				if (typeof args[1] !== 'undefined' && args[1].trim() !== '') {
 					client.join('#'+args[1]);
 					console.log('Joined (a) channel: #'+args[1]);
@@ -58,7 +61,7 @@ var client = new irc.connect(config, function(err, event) {
 				}
 			}
 
-			else if (msg.indexOf('+apart ') === 0 && _.indexOf(mods, user.username) >= 0) {
+			else if (msg.indexOf('+apart ') === 0 && _.indexOf(admins, user.username) >= 0) {
 				if (typeof args[1] !== 'undefined' && args[1].trim() !== '') {
 					client.part('#'+args[1]);
 					console.log('Parted (a) channel: #'+args[1]);
