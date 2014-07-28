@@ -48,7 +48,7 @@ var client = new irc.connect(config, function(err, event) {
 				console.log('Parted (r) channel: #'+user.username);
 			}
 
-			else if (msg.indexOf('+ajoin ') === 0 && user.username == 'playtouhouscum') {
+			else if (msg.indexOf('+ajoin ') === 0 && _.indexOf(mods, user.username) >= 0) {
 				if (typeof args[1] !== 'undefined' && args[1].trim() !== '') {
 					client.join('#'+args[1]);
 					console.log('Joined (a) channel: #'+args[1]);
@@ -58,7 +58,7 @@ var client = new irc.connect(config, function(err, event) {
 				}
 			}
 
-			else if (msg.indexOf('+apart ') === 0 && user.username == 'playtouhouscum') {
+			else if (msg.indexOf('+apart ') === 0 && _.indexOf(mods, user.username) >= 0) {
 				if (typeof args[1] !== 'undefined' && args[1].trim() !== '') {
 					client.part('#'+args[1]);
 					console.log('Parted (a) channel: #'+args[1]);
